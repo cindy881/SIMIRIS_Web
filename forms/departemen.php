@@ -1,6 +1,6 @@
 <section id="deptForm" class="deptForm p-5" style="background-color: #f8f9fa;">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-6">
             <div class="card shadow p-5" style="background-color: #fff; border-radius: 10px;">
 
                 <a href="index.php?hal=datas/dataDept">
@@ -11,17 +11,15 @@
                     <h2>Input Data Departemen</h2>
                 </div>
 
-                <form action="">
-                    <div class="row justify-content-center">
-                        <div class="col">
-                            <div class="mb-3 row">
-                                <label for="inputNama" class="col-sm-2 col-form-label">Nama</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputNama" name="nama_departemen" value="" required>
-                                </div>
+                <form action="controller_departemen.php" method="POST" class="row justify-content-center">
+                    <div class="col">
+                        <div class="mb-3 row">
+                            <label for="inputNama" class="col-sm-2 col-form-label">Nama</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputNama" name="nama_departemen" value="" required>
                             </div>
-                            <button type="submit" name="proses" value="batal" class="btn btn-md text-white col-12 mt-3" style="background-color: #5cb874;">Submit</button>
                         </div>
+                        <button type="submit" name="proses" value="simpan" class="btn btn-md text-white col-12 mt-3" style="background-color: #5cb874;">Submit</button>
                     </div>
                 </form>
             </div>

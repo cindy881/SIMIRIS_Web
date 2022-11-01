@@ -7,28 +7,28 @@ include_once 'layouts/header.php';
 
         <div class="section-title">
             <h2>About Us</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+            <p>Menurut kami, software perkantoran harus memenuhi segala kebutuhan yang rumit tanpa mengakibatkan kesulitan. Misi kami adalah menyediakan software intuitif, berfitur lengkap, terintegrasi penuh, mudah ditingkatkan, semua berjalan dengan lancar untuk semua bisnis dan pengguna.</p>
         </div>
 
         <div class="row">
-            <div class="col-lg-6 order-1 order-lg-2">
-                <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            <div class="col-lg-4 order-1 order-lg-2">
+                <div class="row text-end p-0">
+                    <div class="col">
+                        <i class="bi bi-box-seam-fill" style="color: #5cb874; font-size: 20rem;"></i>
+                        <!-- <img src="assets/img/about.jpg" class="img-fluid" alt=""> -->
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+            <div class="col-lg-7 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                <h3>Membuat sistem manajemen inventaris lebih mudah</h3>
                 <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                    Misi kami adalah menyediakan beragam aplikasi sistem yang membentuk seperangkat alat bantu lengkap yang mudah digunakan untuk memenuhi kebutuhan perkantoran. Kami memberikan jutaan perusahaan akses gampang ke software yang mereka butuhkan untuk menjalankan dan mengembangkan bisnis mereka.
                 </p>
                 <ul>
-                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                    <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                    <li><i class="bi bi-check-circled"></i> Pengalaman pengguna yang mudah dan lancar telah dirancang demi memastikan pemasangan yang mulus bagi pengguna.</li>
                 </ul>
                 <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum
+                    Kemampuan adaptasi dan integrasi penuh mencakup kebutuhan perusahaan bahkan yang paling rumit sekalipun. Fleksibilitas kami sangatlah mutakhir sehingga aplikasi dapat ditambahkan berdasarkan pertumbuhan dari perusahaan Anda, menambahkan aplikasi satu per satu seiring dengan perkembangan kebutuhan Anda dan pertumbuhan basis pelanggan Anda.
                 </p>
             </div>
         </div>

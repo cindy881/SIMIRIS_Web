@@ -1,10 +1,9 @@
 <?php
 $obj_asal = new Asal();
-$obj_pet = new Petugas();
 $data_asal = $obj_asal->dataAsal();
-$data_pet = $obj_pet->dataPet();
+
 ?>
-<section id="invForm" class="invForm p-5" style="background-color: #f8f9fa;">
+<section id="pdaForm" class="pdaForm p-5" style="background-color: #f8f9fa;">
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="card shadow p-5" style="background-color: #fff; border-radius: 10px;">
@@ -19,22 +18,6 @@ $data_pet = $obj_pet->dataPet();
 
                 <form action="controller_pengadaan.php" method="POST" class="row justify-content-center">
                     <div class="col">
-                        <div class="mb-3 row">
-                            <div class="col-sm-2">
-                                <label for="inputPet" class="form-label">Petugas :</label>
-                                <select class="form-select" aria-label="Default select example" name="fk_petugas_pengadaan" required>
-                                    <option selected>--NIP--</option>
-                                    <?php
-                                    foreach ($data_pet as $pet) {
-                                    ?>
-                                        <option value="<?= $pet['id_petugas'] ?>"><?= $pet['nip_pegawai'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <hr>
                         <div class="mb-3 row">
                             <label for="inputKode" class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">

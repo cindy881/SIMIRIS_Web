@@ -83,6 +83,7 @@ h6 {
 
 #topbar .contact-info a:hover {
   color: #5cb874;
+  color: rgb(206, 206, 206);
 }
 
 #topbar .contact-info i {
@@ -242,6 +243,10 @@ h6 {
   color: #5cb874;
 }
 
+/* .navbar .dropdown li .dropdown-item:hover{
+  color: #5cb874;
+} */
+
 .navbar .dropdown:hover>ul {
   opacity: 1;
   top: 100%;
@@ -259,7 +264,7 @@ h6 {
   top: 0;
   left: 100%;
   visibility: visible;
-}
+} 
 
 @media (max-width: 1366px) {
   .navbar .dropdown .dropdown ul {

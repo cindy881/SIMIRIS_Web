@@ -1,37 +1,30 @@
 <?php
 class Petugas
 {
-    //member1 variabel
     private $koneksi;
-    //member2 konstruktor untuk koneksi database
+
     public function __construct()
     {
-        global $dbh; //panggil instance object di koneksi.php 
+        global $dbh;
         $this->koneksi = $dbh;
     }
-    //member3 method2 CRUD
-    public function dataPet()
+
+    public function dataPetugas()
     {
         $sql = "SELECT data_petugas.*, data_pegawai.*
-                FROM data_pegawai
-                INNER JOIN data_petugas ON data_petugas.fk_pegawai_petugas = data_pegawai.id_pegawai";
-        //menggunakan mekanisme prepare statement PDO
+                FROM data_petugas
+                INNER JOIN data_pegawai ON data_pegawai.id_pegawai = data_petugas.fk_pegawai_petugas";
         $ps = $this->koneksi->prepare($sql);
         $ps->execute();
         $rs = $ps->fetchAll();
         return $rs;
     }
 
-    public function dataPetPeminjaman()
+    public function simpan($data)
     {
-        $sql = "SELECT data_petugas.*, data_pegawai.*, peminjaman.*
-                FROM data_pegawai
-                INNER JOIN data_petugas ON data_petugas.fk_pegawai_petugas = data_pegawai.id_pegawai
-                INNER JOIN peminjaman ON peminjaman.fk_petugas_peminjaman = data_petugas.id_petugas";
-        //menggunakan mekanisme prepare statement PDO
+        $sql = "INSERT INTO data_petugas (fk_pegawai_petugas) 
+        VALUES (?)";
         $ps = $this->koneksi->prepare($sql);
-        $ps->execute();
-        $rs = $ps->fetchAll();
-        return $rs;
+        $ps->execute($data);
     }
 }

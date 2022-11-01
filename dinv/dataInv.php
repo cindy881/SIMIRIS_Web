@@ -12,9 +12,13 @@ $data_inv = $model->dataInv();
 
         <div class="row justify-content-center">
             <div class="col-9">
-                <a class="btn btn-sm text-white mb-3" style="background-color: #5cb874;" href="index.php?hal=forms/inv">
-                    Tambah <i class="bi bi-plus-lg fs-7"></i>
-                </a>
+                <?php
+                if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                ?>
+                    <a class="btn btn-md text-white mb-2" style="background-color: #5cb874;" href="index.php?hal=forms/inv">
+                        Tambah <i class="bi bi-plus-lg fs-7"></i>
+                    </a>
+                <?php } ?>
                 <table class="table table-sm table-striped table-bordered text-center">
                     <thead>
                         <tr>
@@ -41,11 +45,26 @@ $data_inv = $model->dataInv();
                                 <td><?= $row['stok_barang'] ?></td>
                                 <td><?= $row['nama_kategori'] ?></td>
                                 <td>
-                                    <a href="index.php?hal=dinv/dataInv_detail&id=<?= $row['id_barang'] ?>">
-                                        <button type="button" class="btn btn-info btn-sm" title="Detail Inventaris">
-                                            <i class="bi bi-eye-fill text-light"></i>
-                                        </button>
-                                    </a>
+                                    <form action="controller_inv.php" method="POST">
+                                        <a href="index.php?hal=dinv/dataInv_detail&id=<?= $row['id_barang'] ?>">
+                                            <button type="button" class="btn btn-info btn-sm" title="Detail Inventaris">
+                                                <i class="bi bi-eye-fill text-light"></i>
+                                            </button>
+                                        </a>
+                                        <?php
+                                        if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                                        ?>
+                                            <a href="index.php?hal=forms/updateInv&idedit=<?= $row['id_barang'] ?>">
+                                                <button type="button" class="btn btn-warning btn-sm" title="Ubah Inventaris">
+                                                    <i class="bi bi-pencil-square text-light" aria-hidden="true"></i>
+                                                </button>
+                                            </a>
+                                            <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" onclick="return confirm('Anda yakin data akan dihapus?')" title="Hapus data inventaris">
+                                                <i class="bi bi-trash text-light" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="idx" value="<?= $row['id_barang'] ?>">
+                                        <?php } ?>
+                                    </form>
                                 </td>
                             </tr>
                         <?php

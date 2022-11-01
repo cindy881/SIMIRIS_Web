@@ -10,24 +10,29 @@ $data_pmj = $model->dataPeminjaman();
             <h2>Data Peminjaman</h2>
         </div>
 
-        <div class="row">
+        <div class="row justify-content-center">
 
-            <div class="col-12">
-                <a class="btn btn-sm text-light mb-3" style="background-color: #5cb874;" href="index.php?hal=forms/peminjaman">
-                    Tambah <i class="bi bi-plus-lg fs-7"></i>
-                </a>
+            <div class="col-9">
+                <?php
+                if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                ?>
+                    <a class="btn btn-md text-light mb-2" style="background-color: #5cb874;" href="index.php?hal=forms/peminjaman">
+                        Tambah <i class="bi bi-plus-lg fs-7"></i>
+                    </a>
+                <?php } ?>
                 <table class="table table-sm table-striped table-bordered text-center">
                     <thead>
                         <tr>
                             <th rowspan="2">NO</th>
-                            <th colspan="3">Peminjaman</th>
-                            <th rowspan="2">Kode Barang</th>
+                            <th colspan="2">Peminjaman</th>
+                            <th colspan="2">Peminjam</th>
                             <th rowspan="2">AKSI</th>
                         </tr>
                         <tr>
                             <th scope="col">Kode</th>
                             <th scope="col">Tanggal</th>
-                            <th scope="col">Jumlah</th>
+                            <th scope="col">NIP</th>
+                            <th scope="col">Nama</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,12 +44,29 @@ $data_pmj = $model->dataPeminjaman();
                                 <th scope="row"><?= $no ?></th>
                                 <td><?= $row['kode_peminjaman'] ?></td>
                                 <td><?= $row['tgl_peminjaman'] ?></td>
-                                <td><?= $row['jumlah_peminjaman'] ?></td>
-                                <td><?= $row['kode_barang'] ?></td>
+                                <td><?= $row['nip_pegawai'] ?></td>
+                                <td><?= $row['nama_pegawai'] ?></td>
                                 <td>
-                                    <a href="index.php?hal=dinv/peminjaman/dataInvPeminjaman_detail&id=<?= $row['id_peminjaman'] ?>">
-                                        <i class="bi bi-eye-fill"></i>
-                                    </a>
+                                    <form action="controller_peminjaman.php" method="POST">
+                                        <a href="index.php?hal=dpeminjaman/dataPeminjaman_detail&id=<?= $row['id_peminjaman'] ?>">
+                                            <button type="button" class="btn btn-info btn-sm" title="Detail Peminjaman">
+                                                <i class="bi bi-eye-fill text-light"></i>
+                                            </button>
+                                        </a>
+                                        <?php
+                                        if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                                        ?>
+                                            <a href="index.php?hal=forms/updatePeminjaman&idedit=<?= $row['id_peminjaman'] ?>">
+                                                <button type="button" class="btn btn-warning btn-sm" title="Ubah Peminjaman">
+                                                    <i class="bi bi-pencil-square text-light" aria-hidden="true"></i>
+                                                </button>
+                                            </a>
+                                            <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" onclick="return confirm('Anda yakin data akan dihapus?')" title="Hapus data peminjaman">
+                                                <i class="bi bi-trash text-light" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="idx" value="<?= $row['id_peminjaman'] ?>">
+                                        <?php } ?>
+                                    </form>
                                 </td>
                             </tr>
                         <?php

@@ -1,10 +1,9 @@
 <?php
-$obj_inv = new Inventaris();
+$obj_inv = new Peminjaman();
 $data_inv = $obj_inv->dataPeminjaman();
-$obj_pet = new Petugas();
-$data_pet = $obj_pet->dataPetPeminjaman();
+
 $obj_peg = new Pegawai();
-$data_peg = $obj_peg->dataPegawaiPeminjaman();
+$data_peg = $obj_peg->dataPegawai();
 ?>
 <section id="invForm" class="invForm p-5" style="background-color: #f8f9fa;">
     <div class="row justify-content-center">
@@ -22,22 +21,6 @@ $data_peg = $obj_peg->dataPegawaiPeminjaman();
                 <form action="controller_peminjaman.php" method="POST" class="row justify-content-center">
                     <div class="col">
                         <div class="mb-3 row">
-                            <div class="col-sm-2">
-                                <label for="inputPet" class="form-label">Petugas :</label>
-                                <select class="form-select" aria-label="Default select example" name="fk_petugas_peminjaman" required>
-                                    <option selected>--NIP--</option>
-                                    <?php
-                                    foreach ($data_pet as $pet) {
-                                    ?>
-                                        <option value="<?= $pet['id_petugas'] ?>"><?= $pet['nip_pegawai'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="mb-3 row">
                             <label for="inputKode" class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="inputKode" name="kode_peminjaman" value="" required>
@@ -47,27 +30,6 @@ $data_peg = $obj_peg->dataPegawaiPeminjaman();
                             <label for="inputTgl" class="col-sm-3 col-form-label">Tanggal</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" id="inputTgl" name="tgl_peminjaman" value="" required>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="inputJml" class="col-sm-3 col-form-label">Jumlah</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="inputJml" name="jumlah_peminjaman" value="" required>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="inputBarang" class="col-sm-3 col-form-label">Inventaris</label>
-                            <div class="col-sm-9">
-                                <select class="form-select" aria-label="Default select example" name="fk_barang_peminjaman" required>
-                                    <option selected>-- Pilih Inventaris--</option>
-                                    <?php
-                                    foreach ($data_inv as $inv) {
-                                    ?>
-                                        <option value="<?= $inv['id_barang'] ?>"><?= $inv['kode_barang'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
                             </div>
                         </div>
                         <div class="mb-3 row">

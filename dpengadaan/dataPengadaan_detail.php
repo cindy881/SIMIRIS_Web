@@ -1,9 +1,12 @@
 <?php
 $id = $_REQUEST['id'];
 
+$obj_pda = new Pengadaan();
+$data_pda = $obj_pda->getPengadaans($id);
+$pda_id = $obj_pda->getPengadaan($id);
+
 $obj_inv = new Inventaris();
 $data_inv = $obj_inv->getInvOnPengadaan($id);
-$pda_id = $obj_inv->getPengadaanDetail($id);
 ?>
 <section id="detailInv" class="detailInv" style="background-color: #f8f9fa;">
     <div class="container shadow p-5" style="background-color: #fff; border-radius: 10px;">
@@ -36,18 +39,33 @@ $pda_id = $obj_inv->getPengadaanDetail($id);
                                 <td scope="col"><?= $pda_id['nama_asal'] ?></td>
                             </tr>
                         </table>
+                        <?php
+                        if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                        ?>
+                            <form action="controller_pengadaan.php" method="POST">
+                                <a href="index.php?hal=forms/updatePengadaan&idedit=<?= $pda_id['id_pengadaan'] ?>">
+                                    <button type="button" class="btn btn-warning btn-sm text-light col-12" title="Ubah Pengadaan">
+                                        Edit <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                            </form>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
         <hr>
 
-        <h4 class="mt-3 mb-2 fw-bold">Daftar Inventaris</h4>
+        <h4 class="mt-4 mb-2 fw-bold">Daftar Inventaris</h4>
         <div class=" row justify-content-center">
             <div class="col">
-                <a class="btn btn-sm text-light mb-3" style="background-color: #5cb874;" href="index.php?hal=dinv/pengadaan/formInvPengadaan&id=<?= $pda_id['fk_barang_masuk'] ?>">
-                    Tambah <i class="bi bi-plus-lg fs-7"></i>
-                </a>
+                <?php
+                if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                ?>
+                    <a class="btn btn-sm text-light mb-2" style="background-color: #5cb874;" href="index.php?hal=forms/pengadaanDetail&id=<?= $pda_id['id_pengadaan'] ?>">
+                        Tambah <i class="bi bi-plus-lg fs-7"></i>
+                    </a>
+                <?php } ?>
                 <table class="table table-sm table-striped table-bordered text-center">
                     <thead>
                         <tr>
@@ -77,11 +95,21 @@ $pda_id = $obj_inv->getPengadaanDetail($id);
                                 <td><?= $row['jumlah_masuk'] ?></td>
                                 <td><?= $row['stok_barang'] ?></td>
                                 <td>
-                                    <a href="index.php?hal=dinv/dataInv_detail&id=<?= $row['id_barang'] ?>">
-                                        <button type="button" class="btn btn-info btn-sm" title="Detail Inventaris">
-                                            <i class="bi bi-eye-fill text-light"></i>
-                                        </button>
-                                    </a>
+                                    <form action="controller_pengadaan_detail.php" method="POST">
+                                        <a href="index.php?hal=dinv/dataInv_detail&id=<?= $row['id_barang'] ?>">
+                                            <button type="button" class="btn btn-info btn-sm" title="Detail Inventaris">
+                                                <i class="bi bi-eye-fill text-light"></i>
+                                            </button>
+                                        </a>
+                                        <?php
+                                        if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                                        ?>
+                                            <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" onclick="return confirm('Anda yakin data akan dihapus?')" title="Hapus data pengadaan">
+                                                <i class="bi bi-trash text-light" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="idx" value="<?= $row['id_detail_masuk'] ?>">
+                                        <?php } ?>
+                                    </form>
                                 </td>
                             </tr>
                         <?php

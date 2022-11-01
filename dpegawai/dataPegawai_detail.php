@@ -1,9 +1,11 @@
 <?php
 $id = $_REQUEST['id'];
 
-$model = new Pegawai();
-$pegawai = $model->getPegawai($id);
-$peminjaman = $model->getPeminjamanPegawai($id);
+$obj_peg = new Pegawai();
+$pegawai = $obj_peg->getPegawai($id);
+
+$obj_pmj = new Peminjaman();
+$peminjaman = $obj_pmj->getPeminjamanOnPegawaiDetails($id);
 ?>
 <section id="pegDetail" class="pegDetail" style="background-color: #f8f9fa;">
     <div class="container shadow p-5" style="background-color: #fff; border-radius: 10px;">
@@ -18,11 +20,11 @@ $peminjaman = $model->getPeminjamanPegawai($id);
         <div class="row">
             <div class="col-6">
                 <div class="row">
-                    <div class="col-3 p-0">
-                        <img src="assets/img/team/team-1.jpg" class="img-fluid m-2" style="height: 8rem; width:auto;" alt="">
+                    <div class="col-5 p-0">
+                        <img src="assets/img/team/team-1.jpg" class="img-fluid m-2" style="height: 12rem; width:auto;" alt="">
                     </div>
-                    <div class="col pt-4">
-                        <table class="table table-sm">
+                    <div class="col">
+                        <table class="table table-sm mt-4">
                             <tr>
                                 <th scope="col">NIP</th>
                                 <td scope="col">:</td>
@@ -39,28 +41,38 @@ $peminjaman = $model->getPeminjamanPegawai($id);
                                 <td scope="col"><?= $pegawai['nama_departemen'] ?></td>
                             </tr>
                         </table>
+                        <?php
+                        if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                        ?>
+                            <form action="controller_pegawai.php" method="POST" class="row">
+                                <a href="index.php?hal=forms/updatePegawai&idedit=<?= $pegawai['id_pegawai'] ?>">
+                                    <button type="button" class="btn btn-sm col-12 text-light" style="background-color: #5cb874;" title="Ubah Pegawai">
+                                        Edit <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                            </form>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
+        <hr>
+
         <div class="container">
-            <h4 class="mt-3 mb-2 fw-bold">Riwayat Peminjaman</h3>
-                <a class="btn btn-sm text-light mb-3" style="background-color: #5cb874;" href="index.php?hal=di">
+            <h4 class="mt-4 mb-2 fw-bold">Riwayat Peminjaman</h3>
+                <!-- <a class="btn btn-sm text-light mb-2" style="background-color: #5cb874;" href="index.php?hal=forms/peminjaman&id=<?= $id ?>">
                     Tambah <i class="bi bi-plus-lg fs-7"></i>
-                </a>
+                </a> -->
                 <table class="table table-sm table-striped table-bordered text-center">
                     <thead>
                         <tr>
                             <th rowspan="2">NO</th>
-                            <th colspan="3">Peminjaman</th>
-                            <th colspan="2">Barang</th>
+                            <th colspan="2">Peminjaman</th>
+                            <th rowspan="2">AKSI</th>
                         </tr>
                         <tr>
                             <th>Kode</th>
                             <th>Tanggal</th>
-                            <th>Jumlah</th>
-                            <th>Kode</th>
-                            <th>Nama</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,9 +84,23 @@ $peminjaman = $model->getPeminjamanPegawai($id);
                                 <th scope="row"><?= $no ?></th>
                                 <td><?= $row['kode_peminjaman'] ?></td>
                                 <td><?= $row['tgl_peminjaman'] ?></td>
-                                <td><?= $row['jumlah_peminjaman'] ?></td>
-                                <td><?= $row['kode_barang'] ?></td>
-                                <td><?= $row['nama_barang'] ?></td>
+                                <td>
+                                    <form action="controller_peminjaman.php" method="POST">
+                                        <a href="index.php?hal=dpeminjaman/datapeminjaman_detail&id=<?= $row['id_peminjaman'] ?>">
+                                            <button type="button" class="btn btn-info btn-sm" title="Detail Pegawai">
+                                                <i class="bi bi-eye-fill text-light"></i>
+                                            </button>
+                                        </a>
+                                        <?php
+                                        if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                                        ?>
+                                            <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" onclick="return confirm('Anda yakin data akan dihapus?')" title="Hapus data pengadaan">
+                                                <i class="bi bi-trash text-light" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="idx" value="<?= $row['id_peminjaman'] ?>">
+                                        <?php } ?>
+                                    </form>
+                                </td>
                             </tr>
                         <?php
                             $no++;

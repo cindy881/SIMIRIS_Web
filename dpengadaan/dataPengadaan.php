@@ -1,5 +1,5 @@
 <?php
-$model = new Inventaris();
+$model = new Pengadaan();
 $data_pda = $model->dataPengadaan();
 ?>
 <!-- ======= Inv Section ======= -->
@@ -9,11 +9,15 @@ $data_pda = $model->dataPengadaan();
         <div class="section-title">
             <h2>Data Pengadaan</h2>
         </div>
-        <a class="btn btn-sm text-white mb-3" style="background-color: #5cb874;" href="index.php?hal=forms/pengadaan">
-            Tambah <i class="bi bi-plus-lg fs-7"></i>
-        </a>
-        <div class="row">
-            <div class="col-12">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <?php
+                if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                ?>
+                    <a class="btn btn-md text-white mb-2" style="background-color: #5cb874;" href="index.php?hal=forms/pengadaan">
+                        Tambah <i class="bi bi-plus-lg fs-7"></i>
+                    </a>
+                <?php } ?>
                 <table class="table table-sm table-striped table-bordered text-center">
                     <thead>
                         <tr>
@@ -38,9 +42,26 @@ $data_pda = $model->dataPengadaan();
                                 <td><?= $row['tgl_pengadaan'] ?></td>
                                 <td><?= $row['nama_asal'] ?></td>
                                 <td>
-                                    <a href="index.php?hal=dpengadaan/dataPengadaan_detail&id=<?= $row['id_pengadaan'] ?>">
-                                        <i class="bi bi-eye-fill"></i>
-                                    </a>
+                                    <form action="controller_pengadaan.php" method="POST">
+                                        <a href="index.php?hal=dpengadaan/dataPengadaan_detail&id=<?= $row['id_pengadaan'] ?>">
+                                            <button type="button" class="btn btn-info btn-sm" title="Detail Pengadaan">
+                                                <i class="bi bi-eye-fill text-light"></i>
+                                            </button>
+                                        </a>
+                                        <?php
+                                        if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                                        ?>
+                                            <a href="index.php?hal=forms/updatePengadaan&idedit=<?= $row['id_pengadaan'] ?>">
+                                                <button type="button" class="btn btn-warning btn-sm" title="Ubah Pengadaan">
+                                                    <i class="bi bi-pencil-square text-light" aria-hidden="true"></i>
+                                                </button>
+                                            </a>
+                                            <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" onclick="return confirm('Anda yakin data akan dihapus?')" title="Hapus data pengadaan">
+                                                <i class="bi bi-trash text-light" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="idx" value="<?= $row['id_pengadaan'] ?>">
+                                        <?php } ?>
+                                    </form>
                                 </td>
                             </tr>
                         <?php

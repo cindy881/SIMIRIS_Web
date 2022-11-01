@@ -45,9 +45,9 @@ $data_kat = $obj_kat->dataKategori();
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="inputStok" class="col-sm-2 col-form-label">Stok</label>
+                            <!-- <label for="inputStok" class="col-sm-2 col-form-label">Stok</label> -->
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="inputStok" name="stok_barang" value="">
+                                <input type="number" class="form-control" id="inputStok" name="stok_barang" placeholder="Isikan 0" hidden>
                             </div>
                         </div>
                         <button type=" submit" name="proses" value="simpan" class="btn btn-md text-white col-12 mt-3" style="background-color: #5cb874;">Simpan</button>

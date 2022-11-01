@@ -10,8 +10,8 @@ $fk_kategori_barang = $_POST['fk_kategori_barang'];
 $data = [
     $kode_barang,
     $nama_barang,
-    $stok_barang,
-    $fk_kategori_barang
+    $fk_kategori_barang,
+    $stok_barang
 ];
 //step 3 eksekusi tombol dengan mekanisme PDO
 $model = new Inventaris();
@@ -21,9 +21,19 @@ switch ($tombol) {
         $model->simpan($data);
         break;
 
+    case 'ubah':
+        $data[] = $_POST['idx'];
+        $model->ubah($data);
+        break;
+
+    case 'hapus':
+        unset($data);
+        $model->hapus($_POST['idx']);
+        break;
+
     default:
-        header('Location:index.php?hal=inv/dataInv');
+        header('Location:index.php?hal=dinv/dataInv');
         break;
 }
 //step 4 diarahkan ke suatu halaman, jika sudah selesai prosesnya
-header('Location:index.php?hal=datas/inv/dataInv');
+header('Location:index.php?hal=dinv/dataInv');

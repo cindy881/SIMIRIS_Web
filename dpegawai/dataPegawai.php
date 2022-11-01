@@ -11,9 +11,13 @@ $data_peg = $model->dataPegawai();
 
         <div class="row justify-content-center">
             <div class="col-9">
-                <a class="btn btn-sm text-light mb-3" style="background-color: #5cb874;" href="index.php?hal=forms/pegawai">
-                    Tambah <i class="bi bi-plus-lg fs-7"></i>
-                </a>
+                <?php
+                if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                ?>
+                    <a class="btn btn-md text-light mb-2" style="background-color: #5cb874;" href="index.php?hal=forms/pegawai">
+                        Tambah <i class="bi bi-plus-lg fs-7"></i>
+                    </a>
+                <?php } ?>
                 <table class="table table-sm table-striped table-bordered text-center">
                     <thead>
                         <tr>
@@ -35,11 +39,26 @@ $data_peg = $model->dataPegawai();
                                 <td><?= $row['nama_pegawai'] ?></td>
                                 <td><?= $row['nama_departemen'] ?></td>
                                 <td>
-                                    <a href="index.php?hal=dpegawai/dataPegawai_detail&id=<?= $row['id_pegawai'] ?>">
-                                        <button type="button" class="btn btn-info btn-sm" title="Detail Pegawai">
-                                            <i class="bi bi-eye-fill text-light"></i>
-                                        </button>
-                                    </a>
+                                    <form action="controller_pegawai.php" method="POST">
+                                        <a href="index.php?hal=dpegawai/dataPegawai_detail&id=<?= $row['id_pegawai'] ?>">
+                                            <button type="button" class="btn btn-info btn-sm" title="Detail Pegawai">
+                                                <i class="bi bi-eye-fill text-light"></i>
+                                            </button>
+                                        </a>
+                                        <?php
+                                        if ($sesi['role'] == 'Admin') { //---------hanya untuk admin----------
+                                        ?>
+                                            <a href="index.php?hal=forms/updatePegawai&idedit=<?= $row['id_pegawai'] ?>">
+                                                <button type="button" class="btn btn-warning btn-sm" title="Ubah Pegawai">
+                                                    <i class="bi bi-pencil-square text-light" aria-hidden="true"></i>
+                                                </button>
+                                            </a>
+                                            <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" onclick="return confirm('Anda Yakin Data akan diHapus?')" title="Hapus Pegawai">
+                                                <i class="bi bi-trash text-light" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="idx" value="<?= $row['id_pegawai'] ?>">
+                                        <?php } ?>
+                                    </form>
                                 </td>
                             </tr>
                         <?php

@@ -1,15 +1,18 @@
 <?php
+$id = $_REQUEST['id'];
+
 $obj_inv = new Inventaris();
-$obj_pda = new Pengadaan();
 $data_inv = $obj_inv->dataInv();
-$data_pda = $obj_pda->dataPengadaan();
+
+$obj_pda = new Pengadaan();
+$data_pda = $obj_pda->getPengadaan($id);
 ?>
 <section id="invForm" class="invForm p-5" style="background-color: #f8f9fa;">
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="card shadow p-5" style="background-color: #fff; border-radius: 10px;">
 
-                <a href="index.php?hal=dpengadaan/dataPengadaan">
+                <a href="index.php?hal=dpengadaan/dataPengadaan_detail&id=<?= $data_pda['id_pengadaan'] ?>">
                     <i class="bi bi-arrow-left fs-3" style="color: #5cb874;"></i>
                 </a>
 
@@ -23,14 +26,7 @@ $data_pda = $obj_pda->dataPengadaan();
                             <div class="col-sm-2">
                                 <label for="inputPet" class="form-label">Pengadaan :</label>
                                 <select class="form-select" aria-label="Default select example" name="fk_pengadaan_masuk" required>
-                                    <option selected>--Kode--</option>
-                                    <?php
-                                    foreach ($data_pda as $pda) {
-                                    ?>
-                                        <option value="<?= $pda['id_pengadaan'] ?>"><?= $pda['kode_pengadaan'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
+                                    <option value="<?= $data_pda['id_pengadaan'] ?>" selected><?= $data_pda['kode_pengadaan'] ?></option>
                                 </select>
                             </div>
                         </div>

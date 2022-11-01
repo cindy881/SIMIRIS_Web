@@ -7,7 +7,8 @@ include_once 'layouts/header.php';
 
         <div class="section-title">
             <h2>Contact</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+            <p>Berikan komentar, kritik, dan saranmu mengenai aplikasi kami. Enjoy our App!
+            </p>
         </div>
 
         <div class="row">

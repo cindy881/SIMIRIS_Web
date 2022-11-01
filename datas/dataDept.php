@@ -9,14 +9,17 @@ $data_dept = $model->dataDepartemen();
             <h2>Daftar Departemen</h2>
         </div>
 
+
         <div class="row justify-content-center">
-            <div class="col-7">
-                <table class="table table-sm table-striped">
+            <div class="col-5">
+                <a class="btn btn-sm text-white mb-3" style="background-color: #5cb874;" href="index.php?hal=forms/departemen">
+                    Tambah <i class="bi bi-plus-lg fs-7"></i>
+                </a>
+                <table class="table table-sm table-striped table-bordered text-center">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,11 +30,6 @@ $data_dept = $model->dataDepartemen();
                             <tr>
                                 <th scope="row"><?= $no ?></th>
                                 <td><?= $row['nama_departemen'] ?></td>
-                                <td>
-                                    <a href="">
-                                        <i class="bi bi-eye-fill"></i>
-                                    </a>
-                                </td>
                             </tr>
                         <?php
                             $no++;
